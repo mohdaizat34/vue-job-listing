@@ -1,6 +1,7 @@
 import {createRouter, createWebHistory } from  'vue-router'
 import  HomeView  from  '@/views/HomeView.vue'
 import JobsView from '@/views/JobsView.vue';
+import NotFoundViewfrom from '@/views/NotFoundView.vue';
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -15,6 +16,11 @@ const router = createRouter({
             path: '/jobs',
             name: 'JobsView',
             component: JobsView
+        },
+        {
+            path: '/:pathMatch(.*)*',
+            name: 'not-found',
+            component: NotFoundViewfrom
         }
     ]
 });
