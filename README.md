@@ -1,4 +1,8 @@
-# vue-test
+#About
+
+It's a project that uses VueJS to display list of jobs that has been fetched using API.
+
+# Vue Job List Project
 
 This template should help get you started developing with Vue 3 in Vite.
 
