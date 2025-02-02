@@ -19,7 +19,7 @@ const jobs = ref([]);
 onMounted(async () => {
   await new Promise((resolve) => setTimeout(resolve, 1000)); // to stimulate loading
   try {
-    const response = await axios.get("http://localhost:8000/jobs");
+    const response = await axios.get("/api/jobs");
     console.log("API Response:", response.data); // Log the response data
     jobs.value = response.data;
   } catch (error) {

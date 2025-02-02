@@ -2,6 +2,7 @@
 import { RouterLink, useRoute } from "vue-router";
 import { reactive, onMounted } from "vue";
 import PulseLoader from "vue-spinner/src/PulseLoader.vue";
+import BackButton from "@/components/BackButton.vue";
 import axios from "axios";
 
 const route = useRoute();
@@ -14,13 +15,13 @@ const state = reactive({
 });
 
 onMounted(async () => {
-  await new Promise((resolve) => setTimeout(resolve, 1000)); // to stimulate loading
+  await new Promise((resolve) => setTimeout(resolve, 1000));
   try {
     const response = await axios.get(`http://localhost:8000/jobs/${jobId}`);
-    console.log("API Response:", response.data); // Log the response data
+    console.log("API Response:", response.data);
     state.job = response.data;
   } catch (error) {
-    console.error("Error Fetching Job:", error); // Log any errors
+    console.error("Error Fetching Job:", error);
   } finally {
     state.isLoading = false;
   }
@@ -28,6 +29,7 @@ onMounted(async () => {
 </script>
 
 <template>
+  <BackButton></BackButton>
   <section v-if="!state.isLoading" class="bg-green-50">
     <div class="container m-auto py-10 px-6">
       <div class="grid grid-cols-1 md:grid-cols-70/30 w-full gap-6">
