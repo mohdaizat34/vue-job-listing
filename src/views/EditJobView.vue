@@ -30,48 +30,30 @@ const state = reactive({
 });
 
 const handleSubmit = async () => {
+  const updatedJob = {
+    type: form.type,
+    title: form.title,
+    description: form.description,
+    salary: form.salary,
+    location: form.location,
+    company: {
+      name: form.company.name,
+      description: form.company.description,
+      contactEmail: form.company.contactEmail,
+      contactPhone: form.company.contactPhone,
+    },
+  };
+
   try {
-    // Format the job update as required
-    const updatedJob = new URLSearchParams();
-    updatedJob.append(
-      "jsonData",
-      JSON.stringify({
-        type: form.type,
-        title: form.title,
-        description: form.description,
-        salary: form.salary,
-        location: form.location,
-        company: {
-          name: form.company.name,
-          description: form.company.description,
-          contactEmail: form.company.contactEmail,
-          contactPhone: form.company.contactPhone,
-        },
-      })
-    );
-
-    // Prepare headers
-    const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
-
-    // Send PATCH request
-    const response = await fetch(`/api/jobs/${jobId}`, {
-      method: "PATCH",
-      headers: myHeaders,
-      body: updatedJob,
-      redirect: "follow",
-    });
-
-    const result = await response.json();
-    console.log("PATCH Response:", result);
-    console.log("Job ID:", jobId);
-
-    toast.success("Job Updated Successfully");
-    router.push(`/job/${$jobId}`);
+    const response = await axios.put(`/api/jobs/${jobId}`, updatedJob);
+    //@todo - show toast
+    toast.success("Job Added Successfully");
+    router.push(`/job/${response.data.id}`);
   } catch (error) {
     console.error("Error updating job:", error);
     toast.error("Error Updating Job");
   }
+  console.log("New Job:", newJob);
 };
 
 onMounted(async () => {
