@@ -141,20 +141,6 @@
       }
     },
     {
-      "id": "cb70",
-      "type": "Part-Time",
-      "title": "Britanni Hinton",
-      "description": "Atque quisquam omnis",
-      "salary": "Under $50K",
-      "location": "Non et dolorem dolor",
-      "company": {
-        "name": "Jacobs Parks Trading",
-        "description": "Tempore molestiae d",
-        "contactEmail": "rowodi@mailinator.com",
-        "contactPhone": "+1 (892) 914-5862"
-      }
-    },
-    {
       "id": "c262",
       "type": "Part-Time",
       "title": "Myles Snow",
@@ -166,34 +152,6 @@
         "description": "Consequat Et dolor ",
         "contactEmail": "zexaxive@mailinator.com",
         "contactPhone": "+1 (251) 793-8307"
-      }
-    },
-    {
-      "id": "1b15",
-      "type": "Full-Time",
-      "title": "Chloe Mckay",
-      "description": "Velit quis do id ex",
-      "salary": "$90K - $100K",
-      "location": "Dolor nostrud est pr",
-      "company": {
-        "name": "Branch and Welch Trading",
-        "description": "Architecto sunt cons",
-        "contactEmail": "tarerafafe@mailinator.com",
-        "contactPhone": "+1 (721) 568-6826"
-      }
-    },
-    {
-      "id": "ff4f",
-      "type": "Part-Time",
-      "title": "Winter Tate",
-      "description": "Quis numquam laudant",
-      "salary": "$150K - $175K",
-      "location": "Nisi ut dignissimos ",
-      "company": {
-        "name": "Mccarty and Carroll LLC",
-        "description": "Dolorum incidunt om",
-        "contactEmail": "xykovup@mailinator.com",
-        "contactPhone": "+1 (455) 158-2646"
       }
     }
   ]

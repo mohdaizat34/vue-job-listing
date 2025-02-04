@@ -8,9 +8,9 @@ import router from './router';
 
 const app = createApp(App)
 
-app.use(router) 
-app.use(Toast)
-app.mount('#app')
+app.use(router);
+app.use(Toast);
+app.mount('#app');
 
 
 
