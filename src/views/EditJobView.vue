@@ -23,7 +23,6 @@ const route = useRoute();
 
 const toast = useToast();
 const jobId = route.params.id;
-console.log("Job ID:", jobId);
 
 const state = reactive({
   isLoading: true,
@@ -31,36 +30,61 @@ const state = reactive({
 });
 
 const handleSubmit = async () => {
-  const updatedJob = {
-    type: form.type,
-    title: form.title,
-    description: form.description,
-    salary: form.salary,
-    location: form.location,
-    company: {
-      name: form.company.name,
-      description: form.company.description,
-      contactEmail: form.company.contactEmail,
-      contactPhone: form.company.contactPhone,
-    },
-  };
-
   try {
-    const response = await axios.put(`/api/jobs/${jobId}`, updatedJob);
-    //@todo - show toast
-    toast.success("Job Added Successfully");
-    router.push(`/job/${response.data.id}`);
+    // Format the job update as required
+    const updatedJob = new URLSearchParams();
+    updatedJob.append(
+      "jsonData",
+      JSON.stringify({
+        type: form.type,
+        title: form.title,
+        description: form.description,
+        salary: form.salary,
+        location: form.location,
+        company: {
+          name: form.company.name,
+          description: form.company.description,
+          contactEmail: form.company.contactEmail,
+          contactPhone: form.company.contactPhone,
+        },
+      })
+    );
+
+    // Prepare headers
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+
+    // Send PATCH request
+    const response = await fetch(`/api/jobs/${jobId}`, {
+      method: "PATCH",
+      headers: myHeaders,
+      body: updatedJob,
+      redirect: "follow",
+    });
+
+    const result = await response.json();
+    console.log("PATCH Response:", result);
+    console.log("Job ID:", jobId);
+
+    toast.success("Job Updated Successfully");
+    router.push(`/job/${$jobId}`);
   } catch (error) {
-    console.error("API Error:", error);
-    //@todo - show toast
-    toast.error("Error Adding Job");
+    console.error("Error updating job:", error);
+    toast.error("Error Updating Job");
   }
 };
 
 onMounted(async () => {
   try {
     const response = await axios.get(`/api/jobs/${jobId}`);
-    state.job = response.data;
+    console.log("API Response:", response.data);
+    // Check if the response contains an array and find the job
+    if (Array.isArray(response.data.data.jobs)) {
+      state.job = response.data.data.jobs.find((job) => job.id == jobId) || {};
+    } else {
+      state.job = response.data.data; // If it's already a single object
+    }
+
     //populate inputs
     form.type = state.job.type;
     form.title = state.job.title;

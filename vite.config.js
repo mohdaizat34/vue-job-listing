@@ -19,9 +19,9 @@ export default defineConfig({
     port: 3000,
     proxy: {
       '/api': {
-        target: 'http://localhost:8000',
+        target: 'https://api.myjson.online',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ''),
+        rewrite: (path) => '/v1/records/b8dbe102-8d17-436a-b0ba-1b3e6e49ce49',
       },
     },
   },
