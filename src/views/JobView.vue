@@ -33,14 +33,7 @@ onMounted(async () => {
   try {
     const response = await axios.get(`/api/jobs/${jobId}`);
     console.log("API Response:", response.data);
-
-    // Check if the response contains an array and find the job
-    if (Array.isArray(response.data.data.jobs)) {
-      jobs.value = response.data.data.jobs.find((job) => job.id == jobId) || {};
-    } else {
-      jobs.value = response.data.data; // If it's already a single object
-    }
-
+    jobs.value = response.data;
     console.log("Selected Job:", jobs.value); // Log to verify
   } catch (error) {
     console.error("Error Fetching Job:", error);

@@ -53,19 +53,14 @@ const handleSubmit = async () => {
     console.error("Error updating job:", error);
     toast.error("Error Updating Job");
   }
-  console.log("New Job:", newJob);
+  console.log("New Job:", updatedJob);
 };
 
 onMounted(async () => {
   try {
     const response = await axios.get(`/api/jobs/${jobId}`);
     console.log("API Response:", response.data);
-    // Check if the response contains an array and find the job
-    if (Array.isArray(response.data.data.jobs)) {
-      state.job = response.data.data.jobs.find((job) => job.id == jobId) || {};
-    } else {
-      state.job = response.data.data; // If it's already a single object
-    }
+    state.job = response.data;
 
     //populate inputs
     form.type = state.job.type;

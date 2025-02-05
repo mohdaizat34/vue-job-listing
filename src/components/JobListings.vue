@@ -20,7 +20,7 @@ onMounted(async () => {
   try {
     const response = await axios.get("/api/jobs");
     console.log("API Response:", response.data); // Log the response data
-    jobs.value = response.data.data.jobs;
+    jobs.value = response.data;
   } catch (error) {
     console.error("API Error:", error); // Log any errors
   } finally {
